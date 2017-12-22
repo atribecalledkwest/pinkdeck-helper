@@ -97,3 +97,6 @@ ENV/
 
 # mypy
 .mypy_cache/
+
+#OUR CUSTOM SHIT
+tests.ahk
