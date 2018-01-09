@@ -17,7 +17,7 @@ log = logging.getLogger("werkzeug")
 log.setLevel(logging.ERROR)
 
 def server_start():
-	twitch_authorize_url = "https://api.twitch.tv/kraken/oauth2/authorize?response_type=token&client_id=teyrrbalgekx3x0apkp8ncauiz2h80&redirect_uri=http://localhost:2111&scope=channel_read+channel_editor"
+	twitch_authorize_url = "https://api.twitch.tv/kraken/oauth2/authorize?response_type=token&client_id={}&redirect_uri=http://localhost:2111&scope=channel_read+channel_editor".format(CLIENT_ID)
 
 	print "Starting server"
 
