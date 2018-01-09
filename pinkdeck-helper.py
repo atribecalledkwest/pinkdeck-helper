@@ -19,7 +19,7 @@ log.setLevel(logging.ERROR)
 def server_start():
 	twitch_authorize_url = "https://api.twitch.tv/kraken/oauth2/authorize?response_type=token&client_id={}&redirect_uri=http://localhost:2111&scope=channel_read+channel_editor".format(CLIENT_ID)
 
-	print "Starting server"
+	print("Starting server")
 
 	app = Flask(__name__)
 
@@ -57,7 +57,7 @@ def server_start():
 
 	@app.route("/authorize")
 	def flask_authorize():
-		print "Got twitch auth key!"
+		print("Got twitch auth key!")
 		global OAUTH
 		items = map(lambda x: x.split("="), request.query_string.split("&"))
 		for key, value in items:
@@ -75,7 +75,7 @@ def server_start():
 	webbrowser.open_new(twitch_authorize_url)
 
 	app.run(port=2111)
-	print "Server ending"
+	print("Server ending")
 
 handlelocation = os.path.expanduser(os.path.join("~", ".pinkdeck.handles"))
 if os.path.isfile(handlelocation):
@@ -83,7 +83,7 @@ if os.path.isfile(handlelocation):
 		try:
 			custom_handles = json.loads(handlefile.read())
 		except:
-			print "ERROR: Couldn't load handles in ~/.pinkdeck.handles, exiting"
+			print("ERROR: Couldn't load handles in ~/.pinkdeck.handles, exiting")
 			sys.exit(2)
 
 cachelocation = os.path.expanduser(os.path.join("~", ".pinkdeck.cache"))
@@ -92,7 +92,7 @@ if os.path.isfile(cachelocation):
 		OAUTH = cachefile.read().strip()
 else:
 	server_start()
-print "Starting twitch stuff"
+print("Starting twitch stuff")
 
 sess = requests.Session()
 sess.headers.update({
@@ -109,7 +109,7 @@ def twitch_get_id():
 	if req.status_code != 200:
 		cachelocation = os.path.expanduser(os.path.join("~", ".pinkdeck.cache"))
 		os.remove(cachelocation)
-		print "ERROR: Cached OAuth value was incorrect or out of date, please restart program to reauth."
+		print("ERROR: Cached OAuth value was incorrect or out of date, please restart program to reauth.")
 		sys.exit(1)
 	return int(data["_id"])
 
@@ -141,24 +141,24 @@ def twitch_set_channel_data(game, title):
 	return sess.put("https://api.twitch.tv/kraken/channels/{id}".format(id=_id), data=json.dumps(data))
 
 def twitch_handle(game, title=None, communities=["varietystreaming"]):
-	print "Setting Twitch channel data"
+	print("Setting Twitch channel data")
 	twitch_set_channel_data(game, title)
 
-	print "Getting Twitch channel communities for {c}".format(c=", ".join(communities))
+	print("Getting Twitch channel communities for {c}".format(c=", ".join(communities)))
 	ids = twitch_get_community_ids(communities)
 	
-	print "Got {i} ids, setting now".format(i=len(ids))
+	print("Got {i} ids, setting now".format(i=len(ids)))
 	fin = twitch_set_channel_communities(ids)
 
 	print("Done")
 
-print "Setting up custom handlers"
+print("Setting up custom handlers")
 for keybind in custom_handles:
-	print "Adding hotkey for {h}".format(h=keybind)
+	print("Adding hotkey for {h}".format(h=keybind))
 	keyboard.add_hotkey(keybind, lambda: twitch_handle(*custom_handles[keybind]))
 
-print "Getting Twich user ID"
+print("Getting Twich user ID")
 _id = twitch_get_id()
 
-print "Starting Keyboard loop"
+print("Starting Keyboard loop")
 keyboard.wait()
