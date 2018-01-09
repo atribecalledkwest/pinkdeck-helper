@@ -59,7 +59,7 @@ def server_start():
 	def flask_authorize():
 		print("Got twitch auth key!")
 		global OAUTH
-		items = map(lambda x: x.split("="), request.query_string.split("&"))
+		items = map(lambda x: x.split("="), request.query_string.decode().split("&"))
 		for key, value in items:
 			if key == "access_token":
 				OAUTH = value
