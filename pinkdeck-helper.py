@@ -155,7 +155,7 @@ def twitch_handle(game, title=None, communities=["varietystreaming"]):
 print("Setting up custom handlers")
 for keybind in custom_handles:
 	print("Adding hotkey for {h}".format(h=keybind))
-	keyboard.add_hotkey(keybind, lambda: twitch_handle(*custom_handles[keybind]))
+	keyboard.add_hotkey(keybind, lambda k=custom_handles[keybind]: twitch_handle(*k))
 
 print("Getting Twich user ID")
 _id = twitch_get_id()
