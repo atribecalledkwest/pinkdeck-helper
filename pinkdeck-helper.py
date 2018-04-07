@@ -161,4 +161,7 @@ print("Getting Twich user ID")
 _id = twitch_get_id()
 
 print("Starting Keyboard loop")
-keyboard.wait()
+try:
+	keyboard.wait()
+except:
+	print("Exiting...")
