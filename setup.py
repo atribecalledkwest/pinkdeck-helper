@@ -15,6 +15,7 @@ setup(
 	python_requires=">3.4",
 	entry_points={
 		"console_scripts": [
+            "pinkdeck=pinkdeck.scripts.cli:main"
 		]
 	}
 )
