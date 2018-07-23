@@ -1,4 +1,22 @@
 {
-	"shift+f12": ["Game Name", "Stream Title", ["arrayofcommunitynames"]],
-	"shift+f13": ["Starcraft", "The opposite of an Artosis Pylon is a WCG champion pylon", ["starcraft"]]
+    "shift+f12": [
+        {
+            "action": "set_channel_title",
+            "data": "Pinkdeck is cool!"
+        }
+    ],
+    "shift+f13": [
+        {
+            "action": "set_channel_title",
+            "data": "The opposite of an Artosis Pylon is a WCG champion pylon"
+        },
+        {
+            "action": "set_channel_game",
+            "data": "Starcraft"
+        },
+        {
+            "action": "set_channel_commuities",
+            "data": ["starcraft", "varietystreaming"]
+        }
+    ]
 }
