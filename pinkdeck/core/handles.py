@@ -1,5 +1,7 @@
 import json
+import logging
 import os
+from pinkdeck.core import config
 
 VALID_METHODS = [
     "set_channel_title",
@@ -8,6 +10,9 @@ VALID_METHODS = [
     "start_channel_commercial",
     "http_request"
 ]
+
+log = logging.getLogger("pinkdeck.core.handles")
+log.setLevel(config.LOG_LEVEL)
 
 def get_handle_file():
     default_data = {}
@@ -33,5 +38,7 @@ def parse_handles(fp):
         for item in value:
             if item.get("action") in VALID_METHODS:
                 parsed_items.append(item)
+            else:
+                log.error("Item in {} has invalid action: {}".format(key, item.get("action")))
         ret[key] = parsed_items
     return ret

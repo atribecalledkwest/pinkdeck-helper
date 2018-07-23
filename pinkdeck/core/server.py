@@ -8,7 +8,7 @@ werklog = logging.getLogger("werkzeug")
 werklog.setLevel(logging.ERROR)
 
 log = logging.getLogger("pinkdeck.core.server")
-log.setLevel(logging.ERROR)
+log.setLevel(config.LOG_LEVEL)
 
 # XXX: Global state really sucks, and can probably be fixed with some changes.
 global oauth

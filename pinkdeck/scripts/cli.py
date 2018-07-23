@@ -13,7 +13,7 @@ LOGO = """
 
 def main():
     log = logging.getLogger("pinkdeck.scripts.cli")
-    log.setLevel(logging.INFO)
+    log.setLevel(config.LOG_LEVEL)
 
     print(LOGO)
 
